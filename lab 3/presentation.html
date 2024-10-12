@@ -1,0 +1,100 @@
+<h2 id="цель-лабораторной-работы">Цель лабораторной работы</h2>
+<p>Изучение алгоритма шифрования гаммированием</p>
+<h2 id="выполнение-лабораторной-работы">Выполнение лабораторной
+работы</h2>
+<p>Гаммирование – это наложение (снятие) на открытые (зашифрованные)
+данные криптографической гаммы, т.е. последовательности элементов
+данных, вырабатываемых с помощью некоторого криптографического
+алгоритма, для получения зашифрованных (открытых) данных.</p>
+<h2 id="гаммирование">Гаммирование</h2>
+<p>Наложение (или снятие) гаммы на блок сообщения в рассматриваемом нами
+стандарте реализуется с помощью операции побитного сложения по модулю 2
+(XOR). То есть при шифровании сообщений каждый блок открытого сообщения
+ксорится с блоком криптографической гаммы, длина которого должна
+соответствовать длине блоков открытого сообщения. При этом, если размер
+блока исходного текста меньше, чем размер блока гаммы, блок гаммы
+обрезается до размера блока исходного текста (выполняется процедура
+усечения гаммы).</p>
+<h2 id="алгоритм">Алгоритм</h2>
+<figure id="fig:001">
+<img src="image/0.png" alt="Шифрование" />
+<figcaption aria-hidden="true">Шифрование</figcaption>
+</figure>
+<h2 id="алгоритм-1">Алгоритм</h2>
+<figure id="fig:002">
+<img src="image/00.png" alt="Дешифровка" />
+<figcaption aria-hidden="true">Дешифровка</figcaption>
+</figure>
+<h2 id="формула">Формула</h2>
+<p>В аддитивных шифрах символы исходного сообщения заменяются числами,
+которые складываются по модулю с числами гаммы. Ключом шифра является
+гамма, символы которой последовательно повторяются. Перед шифрованием
+символы сообщения и гаммы заменяются их номерами в алфавите и само
+кодирование выполняется по формуле</p>
+<p><span
+class="math display"><em>C</em><em>i</em> = (<em>T</em><em>i</em> + <em>G</em><em>i</em>)<em>m</em><em>o</em><em>d</em><em>N</em></span></p>
+<h2 id="пример-работы-алгоритма">Пример работы алгоритма</h2>
+<figure id="fig:003">
+<img src="image/000.png" alt="Работа алгоритма гаммирования" />
+<figcaption aria-hidden="true">Работа алгоритма
+гаммирования</figcaption>
+</figure>
+<h2 id="реализация-шифратора-и-дешифратора">Реализация шифратора и
+дешифратора</h2>
+<pre><code>def main():
+    dict = {&quot;а&quot; :1, &quot;б&quot; :2 , &quot;в&quot; :3 ,&quot;г&quot; :4 ,&quot;д&quot; :5 ,&quot;е&quot; :6 ,&quot;ё&quot; :7 ,&quot;ж&quot;: 8, &quot;з&quot;: 9, &quot;и&quot;: 10, &quot;й&quot;: 11, &quot;к&quot;: 12, &quot;л&quot;: 13,
+            &quot;м&quot;: 14, &quot;н&quot;: 15, &quot;о&quot;: 16, &quot;п&quot;: 17,
+            &quot;р&quot;: 18, &quot;с&quot;: 19, &quot;т&quot;: 20, &quot;у&quot;: 21, &quot;ф&quot;: 22, &quot;х&quot;: 23, &quot;ц&quot;: 24, &quot;ч&quot;: 25, &quot;ш&quot;: 26, &quot;щ&quot;: 27, &quot;ъ&quot;: 28,
+            &quot;ы&quot;: 29, &quot;ь&quot;: 30, &quot;э&quot;: 31, &quot;ю&quot;: 32, &quot;я&quot;: 32
+            }
+    dict2 = {v: k for k, v in dict.items()}
+    gamma = input(&quot;Введите гамму(на русском языке! Да и пробелы тоже нельзя! Короче, только символы из dict&quot;).lower()
+    text = input(&quot;Введите текст для шифрования&quot;).lower()
+    listofdigitsoftext = list()
+    listofdigitsofgamma = list()
+    for i in text:
+        listofdigitsoftext.append(dict[i])
+    print(&quot;Числа текста&quot;, listofdigitsoftext)
+    for i in gamma:
+        listofdigitsofgamma.append(dict[i])
+    print(&quot;числа гаммы&quot;, listofdigitsofgamma)
+    listofdigitsresult = list()
+    ch = 0
+    for i in text:
+        try:
+            a = dict[i] + listofdigitsofgamma[ch]
+        except:
+            ch=0
+            a = dict[i] + listofdigitsofgamma[ch]
+        if a&gt;=33:
+            a = a%33
+        ch+=1
+        listofdigitsresult.append(a)
+    print(&quot;Числа зашифрованного текста&quot;, listofdigitsresult)
+    textencrypted=&quot;&quot;
+    for i in listofdigitsresult:
+        textencrypted+=dict2[i]
+    print(&quot;Зашифрованный текст: &quot;, textencrypted)
+    listofdigits = list()
+    for i in textencrypted:
+        listofdigits.append(dict[i])
+    ch = 0
+    listofdigits1 = list()
+    for i in listofdigits:
+        a = i - listofdigitsofgamma[ch]
+        if a &lt; 1:
+            a = 33 + a
+        listofdigits1.append(a)
+        ch+=1
+    textdecrypted = &quot;&quot;
+    for i in listofdigits1:
+        textdecrypted+=dict2[i]
+    print(&quot;Decrypted text&quot;, textdecrypted)</code></pre>
+<h2 id="пример-работы-программы">Пример работы программы</h2>
+<figure id="fig:004">
+<img src="image/пример.png" alt="Работа алгоритма гаммирования" />
+<figcaption aria-hidden="true">Работа алгоритма
+гаммирования</figcaption>
+</figure>
+<h2 id="выводы">Выводы</h2>
+<p>Изучили алгоритм шифрования с помощью гаммирования</p>
