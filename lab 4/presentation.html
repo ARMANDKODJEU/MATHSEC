@@ -1,0 +1,111 @@
+<h1 id="цели-и-задачи">Цели и задачи</h1>
+<h2 id="цель-лабораторной-работы">Цель лабораторной работы</h2>
+<p>Изучение алгоритма Евклида нахождения Наибольший общий делитель и его
+вариаций.</p>
+<h1 id="выполнение-лабораторной-работы">Выполнение лабораторной
+работы</h1>
+<h2 id="наибольший-общий-делитель">Наибольший общий делитель</h2>
+<p>Наибольший общий делитель (НОД) – это наибольшее целое число, на
+которое два или более целых числа можно поделить без остатка. Например,
+НОД чисел 12 и 18 равен 6, потому что 6 является наибольшим числом,
+которое делит оба этих числа на целое.</p>
+<h2 id="алгоритм-евклида">Алгоритм Евклида</h2>
+<p>Вход. Целые числа <span
+class="math inline"><em>a</em>, <em>b</em>; 0 &lt; <em>b</em> &lt; <em>a</em></span>.
+Выход. <span class="math inline"><em>d</em>=</span> НОД<span
+class="math inline">(<em>a</em>, <em>b</em>)</span>.</p>
+<ul>
+<li>шаг 1. Положить <span
+class="math inline"><em>r</em><sub>0</sub> = <em>a</em></span>, <span
+class="math inline"><em>r</em><sub>1</sub> = <em>b</em></span>, <span
+class="math inline"><em>i</em> = 1</span>.</li>
+<li>шаг 2. Найти остаток <span
+class="math inline"><em>r</em><sub><em>i</em></sub> + 1</span> от
+деления <span
+class="math inline"><em>r</em><sub><em>i</em></sub>–1</span> на <span
+class="math inline"><em>r</em><sub><em>i</em></sub></span>.</li>
+<li>шаг 3. Если <span
+class="math inline"><em>r</em><sub><em>i</em></sub> + 1 = 0</span>, то
+положить <span
+class="math inline"><em>d</em> = <em>r</em><sub><em>i</em></sub></span>.
+В противном случае положить <span
+class="math inline"><em>i</em> = <em>i</em> + 1</span> и вернуться на
+шаг 2.</li>
+<li>шаг 4. Результат: <span class="math inline"><em>d</em></span>.</li>
+</ul>
+<h2 id="бинарный-алгоритм-евклида">Бинарный алгоритм Евклида</h2>
+<ul>
+<li>Вход. Целые числа <span
+class="math inline"><em>a</em>, <em>b</em>; 0 &lt; <em>b</em> ≤ <em>a</em></span>.</li>
+<li>Выход. <span class="math inline"><em>d</em>=</span> HOД<span
+class="math inline">(<em>a</em>, <em>b</em>)</span>.</li>
+</ul>
+<ol type="1">
+<li>Положить <span class="math inline"><em>g</em> = 1</span>.</li>
+<li>Пока оба числа <span class="math inline"><em>a</em></span> и <span
+class="math inline"><em>b</em></span> четные, выполнять <span
+class="math inline"><em>a</em> = <em>a</em>/2, <em>b</em> = <em>b</em>/2, <em>g</em> = 2<em>g</em></span>
+до получения хотя бы одного нечетного значения <span
+class="math inline"><em>a</em></span> или <span
+class="math inline"><em>b</em></span>.</li>
+<li>Положить <span
+class="math inline"><em>u</em> = <em>a</em>, <em>v</em> = <em>b</em></span>.</li>
+<li>Пока <span class="math inline"><em>u</em> ≠ 0</span>, выполнять
+следующие действия.
+<ul>
+<li>Пока <span class="math inline"><em>u</em></span> четное, полагать
+<span class="math inline"><em>u</em> = <em>u</em>/2</span>.</li>
+<li>Пока <span class="math inline"><em>v</em></span> четное, полагать
+<span class="math inline"><em>v</em> = <em>v</em>/2</span>.</li>
+<li>При <span class="math inline"><em>u</em> ≥ <em>v</em></span>
+положить <span
+class="math inline"><em>u</em> = <em>u</em> − <em>v</em></span>. В
+противном случае положить <span
+class="math inline"><em>v</em> = <em>v</em>–<em>u</em></span>.</li>
+</ul></li>
+<li>Положить <span
+class="math inline"><em>d</em> = <em>g</em><em>v</em></span>.</li>
+<li>Результат: <span class="math inline"><em>d</em></span></li>
+</ol>
+<h2 id="расширенный-алгоритм-евклида">Расширенный алгоритм Евклида</h2>
+<ul>
+<li>Вход. Целые числа <span
+class="math inline"><em>a</em>, <em>b</em>; 0 &lt; <em>b</em> ≤ <em>a</em></span>.</li>
+<li>Выход: <span class="math inline"><em>d</em>=</span> НОД<span
+class="math inline">(<em>a</em>, <em>b</em>)</span>; такие целые числа
+<span class="math inline"><em>x</em>, <em>y</em></span>, что <span
+class="math inline"><em>a</em><em>x</em> + <em>b</em><em>y</em> = <em>d</em></span>.</li>
+</ul>
+<ol type="1">
+<li>Положить <span
+class="math inline"><em>r</em><sub>0</sub> = <em>a</em>, <em>r</em><sub>1</sub> = <em>b</em>, <em>x</em><sub>0</sub> = 1, <em>x</em><sub>1</sub> = 0, <em>y</em><sub>0</sub> = 0, <em>y</em><sub>1</sub> = 1, <em>i</em> = 1</span></li>
+<li>Разделить с остатком <span
+class="math inline"><em>r</em><sub><em>i</em></sub>–1</span> на <span
+class="math inline"><em>r</em><sub><em>i</em></sub></span> : <span
+class="math inline"><em>r</em><sub>(<em>i</em>–1)</sub> = <em>q</em><sub><em>i</em></sub> * <em>r</em><sub><em>i</em></sub> + <em>r</em><sub><em>i</em></sub> + 1</span></li>
+<li>Если <span
+class="math inline"><em>r</em><sub>(<em>i</em> + 1)</sub> = 0</span>, то
+положить <span
+class="math inline"><em>d</em> = <em>r</em><sub><em>i</em></sub></span>,
+<span
+class="math inline"><em>x</em> = <em>x</em><sub><em>i</em></sub></span>,
+<span
+class="math inline"><em>y</em> = <em>y</em><sub><em>i</em></sub></span>.
+В противном случае положить <span
+class="math inline"><em>x</em><sub>(<em>i</em> + 1)</sub> = (<em>x</em><sub>(<em>i</em>–1)</sub>–<em>q</em><sub><em>i</em></sub> * <em>x</em><sub><em>i</em></sub></span>,
+<span
+class="math inline"><em>y</em><sub>(<em>i</em> + 1)</sub> = <em>y</em><sub>(<em>i</em>–1)</sub>–<em>q</em><sub><em>i</em></sub> * <em>y</em><sub><em>i</em></sub></span>,
+<span class="math inline"><em>i</em> = <em>i</em> + 1</span> и вернуться
+на шаг 2.</li>
+<li>Результат: <span
+class="math inline"><em>d</em>, <em>x</em>, <em>y</em></span>.</li>
+</ol>
+<h2 id="пример-работы-алгоритма">Пример работы алгоритма</h2>
+<figure id="fig:001">
+<img src="image/0.png" alt="Работа алгоритма" />
+<figcaption aria-hidden="true">Работа алгоритма</figcaption>
+</figure>
+<h1 id="выводы">Выводы</h1>
+<h2 id="результаты-выполнения-лабораторной-работы">Результаты выполнения
+лабораторной работы</h2>
+<p>Изучил алгоритм Евклида нахождения Наибольший общий делитель.</p>
